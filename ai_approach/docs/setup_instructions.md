@@ -6,7 +6,7 @@
 ## Solution: Downgrade to Python 3.12
 
 ### Step 1: Update `.python-version`
-Edit the `.python-version` file and change:
+Edit the `ai_approach/.python-version` file and change:
 ```
 3.14
 ```
@@ -16,7 +16,7 @@ to:
 ```
 
 ### Step 2: Update `pyproject.toml`
-Edit the `pyproject.toml` file and change line 6 from:
+Edit the `ai_approach/pyproject.toml` file and change line 6 from:
 ```toml
 requires-python = ">=3.14"
 ```

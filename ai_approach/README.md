@@ -12,30 +12,31 @@ Predict the probability that a wildfire will threaten an evacuation zone (come w
 
 ```
 WiDSIrelandLab2026/
-├── data/                           # Data files and outputs
-│   ├── train.csv                   # Training data
-│   ├── test.csv                    # Test data
-│   ├── metaData.csv               # Feature descriptions
-│   ├── X_train_engineered.csv     # Processed training features
-│   ├── X_test_engineered.csv      # Processed test features
-│   ├── y_train.csv                # Training targets
-│   ├── selected_features.csv      # Final feature list
-│   ├── feature_importance.csv     # Model feature rankings
-│   └── submission.csv             # Final predictions
-├── notebooks/                      # Jupyter notebooks
-│   ├── 01_eda.ipynb               # Exploratory Data Analysis
-│   ├── 02_visualisation.ipynb     # Data Visualization
-│   ├── 03_feature_engineering.ipynb   # Feature Engineering
-│   └── 04_modelling_and_evaluation.ipynb  # Model Training & Evaluation
-├── figures/                        # Generated visualizations
-├── models/                         # Saved models and scalers
-├── docs/                          # Documentation
-│   ├── project_summary.md         # Comprehensive project documentation
-│   ├── setup_instructions.md      # Environment setup guide
-│   ├── scikit_survival_advantages.md  # Survival analysis rationale
-│   ├── integration_summary.md     # Notebook integration details
-│   └── visualization_enhancements.md  # Visualization improvements
-└── README.md                      # This file
+└── ai_approach/                    # Main project directory
+    ├── data/                       # Data files and outputs
+    │   ├── train.csv               # Training data
+    │   ├── test.csv                # Test data
+    │   ├── metaData.csv           # Feature descriptions
+    │   ├── X_train_engineered.csv # Processed training features
+    │   ├── X_test_engineered.csv  # Processed test features
+    │   ├── y_train.csv            # Training targets
+    │   ├── selected_features.csv  # Final feature list
+    │   ├── feature_importance.csv # Model feature rankings
+    │   └── submission.csv         # Final predictions
+    ├── notebooks/                  # Jupyter notebooks
+    │   ├── 01_eda.ipynb           # Exploratory Data Analysis
+    │   ├── 02_visualisation.ipynb # Data Visualization
+    │   ├── 03_feature_engineering.ipynb   # Feature Engineering
+    │   └── 04_modelling_and_evaluation.ipynb  # Model Training & Evaluation
+    ├── figures/                    # Generated visualizations
+    ├── models/                     # Saved models and scalers
+    ├── docs/                      # Documentation
+    │   ├── project_summary.md     # Comprehensive project documentation
+    │   ├── setup_instructions.md  # Environment setup guide
+    │   ├── scikit_survival_advantages.md  # Survival analysis rationale
+    │   ├── integration_summary.md # Notebook integration details
+    │   └── visualization_enhancements.md  # Visualization improvements
+    └── README.md                  # This file
 ```
 
 ## 🚀 Quick Start
@@ -49,7 +50,7 @@ WiDSIrelandLab2026/
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/WiDSIrelandLab2026.git
-cd WiDSIrelandLab2026
+cd WiDSIrelandLab2026/ai_approach
 
 # Install dependencies using uv (recommended)
 uv sync
@@ -82,13 +83,13 @@ Execute notebooks in order:
 
 ## 📚 Documentation
 
-Detailed documentation is available in the [`docs/`](docs/) folder:
+Detailed documentation is available in the [`ai_approach/docs/`](ai_approach/docs/) folder:
 
-- **[Project Summary](docs/project_summary.md)**: Comprehensive overview of the project, methodology, and results
-- **[Setup Instructions](docs/setup_instructions.md)**: Environment setup and dependency management
-- **[Scikit-Survival Advantages](docs/scikit_survival_advantages.md)**: Why we use survival analysis
-- **[Integration Summary](docs/integration_summary.md)**: Notebook workflow details
-- **[Visualization Enhancements](docs/visualization_enhancements.md)**: Visualization improvements
+- **[Project Summary](ai_approach/docs/project_summary.md)**: Comprehensive overview of the project, methodology, and results
+- **[Setup Instructions](ai_approach/docs/setup_instructions.md)**: Environment setup and dependency management
+- **[Scikit-Survival Advantages](ai_approach/docs/scikit_survival_advantages.md)**: Why we use survival analysis
+- **[Integration Summary](ai_approach/docs/integration_summary.md)**: Notebook workflow details
+- **[Visualization Enhancements](ai_approach/docs/visualization_enhancements.md)**: Visualization improvements
 
 ## 🤝 Contributing
 
@@ -96,7 +97,7 @@ This project was developed as part of the WiDS Datathon 2026. Contributions and 
 
 ## 📄 License
 
-See [LICENSE](LICENSE) file for details.
+See [LICENSE](ai_approach/LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 

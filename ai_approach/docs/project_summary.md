@@ -202,23 +202,24 @@ Combined approach:
 
 ```
 WiDSIrelandLab2026/
-├── data/
-│   ├── train.csv                      # Training data
-│   ├── test.csv                       # Test data
-│   ├── metaData.csv                   # Feature descriptions
-│   ├── X_train_engineered.csv         # Processed training features
-│   ├── X_test_engineered.csv          # Processed test features
-│   ├── y_train.csv                    # Training targets
-│   ├── selected_features.csv          # Final feature list
-│   ├── feature_importance.csv         # Model feature rankings
-│   └── submission.csv                 # Final predictions
-├── notebooks/
-│   ├── 01_eda.ipynb                   # Exploratory Data Analysis
-│   ├── 02_visualisation.ipynb         # Data Visualization
-│   ├── 03_feature_engineering.ipynb   # Feature Engineering
-│   └── 04_modelling_and_evaluation.ipynb  # Model Training & Evaluation
-├── figures/                           # Generated visualizations
-└── models/                            # Saved models and scalers
+└── ai_approach/                       # Main project directory
+    ├── data/
+    │   ├── train.csv                  # Training data
+    │   ├── test.csv                   # Test data
+    │   ├── metaData.csv               # Feature descriptions
+    │   ├── X_train_engineered.csv     # Processed training features
+    │   ├── X_test_engineered.csv      # Processed test features
+    │   ├── y_train.csv                # Training targets
+    │   ├── selected_features.csv      # Final feature list
+    │   ├── feature_importance.csv     # Model feature rankings
+    │   └── submission.csv             # Final predictions
+    ├── notebooks/
+    │   ├── 01_eda.ipynb               # Exploratory Data Analysis
+    │   ├── 02_visualisation.ipynb     # Data Visualization
+    │   ├── 03_feature_engineering.ipynb   # Feature Engineering
+    │   └── 04_modelling_and_evaluation.ipynb  # Model Training & Evaluation
+    ├── figures/                       # Generated visualizations
+    └── models/                        # Saved models and scalers
 ```
 
 ## Workflow Summary
