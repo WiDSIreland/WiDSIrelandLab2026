@@ -1,0 +1,12 @@
+{
+  "exclude": [
+    "**/__pycache__",
+    "**/.venv",
+    "**/node_modules"
+  ],
+  "ignore": [
+    "notebooks/**/*.ipynb"
+  ],
+  "reportUndefinedVariable": "none",
+  "reportMissingImports": "warning"
+}

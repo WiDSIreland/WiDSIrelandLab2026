@@ -1,0 +1,10 @@
+{
+  "model_type": "RandomSurvivalForest",
+  "n_estimators": 200,
+  "validation_c_index": 0.9356846473029046,
+  "n_features": 62,
+  "n_training_samples": 221,
+  "random_state": 42,
+  "trained_date": "2026-04-17T16:27:40.722934",
+  "censoring_rate": 0.6877828054298643
+}

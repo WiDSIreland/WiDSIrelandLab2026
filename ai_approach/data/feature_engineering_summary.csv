@@ -1,0 +1,10 @@
+Metric,Value
+Original Features,34
+Zero Indicators Added,25
+Log Transforms Added,25
+Interaction Features,5
+Domain-Specific Features,4
+Polynomial Features,4
+Features Removed (Multicollinearity),14
+Final Selected Features,62
+Feature Reduction,8.8%
