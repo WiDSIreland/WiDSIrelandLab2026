@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WiDS 2026 — Notebook Comparison Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161920;
+    --surface2: #1e222d;
+    --border: #2a2f3d;
+    --accent: #ff6b35;
+    --accent2: #4cc9f0;
+    --accent3: #7bed9f;
+    --accent4: #ffd166;
+    --text: #e8eaf0;
+    --text-dim: #8892a4;
+    --you: #7bed9f;
+    --n20: #4cc9f0;
+    --fire: #ff9f43;
+    --hblend: #a29bfe;
+    --wids00: #fd79a8;
+    --wids-global: #fdcb6e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1025 50%, #0d1520 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(76,201,240,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  header p {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 640px;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-family: 'DM Mono', monospace;
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main { padding: 40px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #fff;
+  }
+
+  /* ── NOTEBOOK CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #3a3f52; }
+  .card.you-card {
+    border-color: var(--you);
+    box-shadow: 0 0 0 1px rgba(123,237,159,0.2), 0 4px 24px rgba(123,237,159,0.06);
+  }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-nb {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .card-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .score-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .score-10 { background: rgba(123,237,159,0.15); color: var(--accent3); }
+  .score-9  { background: rgba(123,237,159,0.12); color: #6de89a; }
+  .score-8  { background: rgba(76,201,240,0.12);  color: var(--accent2); }
+  .score-7  { background: rgba(253,203,110,0.12); color: var(--accent4); }
+  .score-6  { background: rgba(255,159,67,0.12);  color: var(--fire); }
+  .score-5  { background: rgba(162,155,254,0.12); color: var(--hblend); }
+  .score-4  { background: rgba(255,107,53,0.12);  color: var(--accent); }
+  .score-3  { background: rgba(253,121,168,0.12); color: var(--wids00); }
+  .score-2  { background: rgba(150,150,150,0.12); color: #888; }
+  .score-na { background: rgba(150,150,150,0.08); color: #666; }
+
+  /* ── INSIGHT BOX ── */
+  .insight {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .insight strong { color: var(--text); }
+
+  /* ── SUMMARY TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  thead tr {
+    background: var(--surface2);
+  }
+  th {
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  th:first-child { width: 200px; }
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+  .row-you td { background: rgba(123,237,159,0.04) !important; }
+  .cat-name {
+    font-size: 13px; font-weight: 500; color: var(--text);
+  }
+  .nb-name-cell {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+  }
+  .you-marker {
+    font-size: 10px;
+    background: rgba(123,237,159,0.2);
+    color: var(--you);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+  .total-row td {
+    font-weight: 600;
+    border-top: 2px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+  }
+
+  /* ── CONCLUSION ── */
+  .conclusion {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 48px;
+  }
+  .conclusion h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .strengths-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .strength-block {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .strength-block h3 {
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .strength-block.green h3 { color: var(--you); }
+  .strength-block.blue  h3 { color: var(--accent2); }
+  .strength-block ul {
+    list-style: none;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .strength-block ul li::before {
+    content: '→ ';
+    color: var(--text-dim);
+  }
+  .strength-block ul li { margin-bottom: 6px; }
+
+  @media (max-width: 700px) {
+    main { padding: 20px; }
+    header { padding: 40px 20px; }
+    .legend { padding: 16px 20px; }
+    .strengths-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">WiDS Datathon 2026 · Wildfire Prediction</div>
+  <h1>Notebook Comparison<br>Report</h1>
+  <p>A structured analysis of five solution notebooks across eleven categories. Your solution (01–04) is the reference.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:var(--you)"></div> Your Solution (01–04)</div>
+  <div class="legend-item"><div class="dot" style="background:var(--n20)"></div> wids-n20</div>
+  <div class="legend-item"><div class="dot" style="background:var(--fire)"></div> the-fire-intelligence-story</div>
+  <div class="legend-item"><div class="dot" style="background:var(--hblend)"></div> h-blend</div>
+  <div class="legend-item"><div class="dot" style="background:var(--wids00)"></div> wids00</div>
+  <div class="legend-item"><div class="dot" style="background:var(--wids-global)"></div> wids-global-submission-analysis</div>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     1. EDA
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">Exploratory Data Analysis</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution (01_eda)</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Exceptional depth. Covers missing values, zero-inflation detection, multicollinearity screening, outlier analysis via IQR, temporal feature distributions, event/censoring analysis, train vs. test distribution shift, and feature category breakdown. Uses metadata to contextualise features. Concludes with an actionable 6-point insight summary that feeds directly into subsequent notebooks.</div>
+      <span class="score-badge score-9">9 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">No EDA performed. Jumps directly to feature engineering and modelling. Some implicit understanding of the data (e.g., near/far zone segmentation, sparse vs. stable fire regimes) is baked into the engineering logic, but not surfaced as formal analysis.</div>
+      <span class="score-badge score-2">2 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">Narrative EDA delivered as a visual storytelling essay with AI-generated images and thematic sections (spark → growth → direction → impact). Insightful framing around rare-event prediction and fire behaviour. However, no statistical analysis, no correlation tests, no distribution plots of actual data. Qualitative only.</div>
+      <span class="score-badge score-4">4 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend</div>
+      <div class="card-nb">h-blend.py</div>
+      <div class="card-text">No EDA. Pure post-processing and blending of pre-existing submissions. Dataset not examined at all.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--wids00)">wids00</div>
+      <div class="card-nb">wids00.py</div>
+      <div class="card-text">No EDA. Same blend-only approach as h-blend. Identical codebase, slightly different weights.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--wids-global)">wids-global-submission-analysis</div>
+      <div class="card-nb">wids-global-submission-analysis.py</div>
+      <div class="card-text">Submission-level analysis only (KDE plots, correlation heatmaps of predictions from different models). No EDA on raw training data.</div>
+      <span class="score-badge score-2">2 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> Your EDA is the strongest in the set by a considerable margin. The connection from EDA findings directly to feature engineering decisions (zero indicators, log transforms, interaction terms) is particularly good practice.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     2. DATA VISUALISATION
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">Data Visualisation</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution (02_visualisation)</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Strong suite: hand-rolled Kaplan-Meier curve, cumulative incidence curve with horizon markers, multi-panel horizon analysis (evolution, bar chart, incremental), correlation heatmap, scatter plots coloured by event status, temporal patterns (hour/day/month × event rate), and per-category feature histograms. Plots saved to disk. Monotonicity validation included.</div>
+      <span class="score-badge score-9">9 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">No visualisations at all. All outputs are numerical (progress logs, final statistics). The blending logic is inscrutable without plots to validate the near/far zone split or calibration floors.</div>
+      <span class="score-badge score-1">1 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">AI-generated conceptual images embedded in markdown — visually rich but entirely external. The inline blend code inherits seaborn KDE plots and a bar chart from h-blend, showing submission distributions and a correlation matrix of predictions. Colourful and readable, but not grounded in the raw data.</div>
+      <span class="score-badge score-4">4 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend</div>
+      <div class="card-nb">h-blend.py</div>
+      <div class="card-text">KDE plots of per-horizon prediction distributions across submissions, bar charts of submission ranking ratios, a correlation heatmap of models, and a log-scale histogram. Solid post-hoc blend visualisation toolkit. Not data visualisation in the EDA sense.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--wids00)">wids00</div>
+      <div class="card-nb">wids00.py</div>
+      <div class="card-text">Identical visualisation suite to h-blend (same library code). Same score.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--wids-global)">wids-global-submission-analysis</div>
+      <div class="card-nb">wids-global-submission-analysis.py</div>
+      <div class="card-text">Same h-blend visualisation framework — KDE, correlation heatmap, histograms of submission outputs. Compact all-in-one cell. Nothing new beyond the other blend notebooks.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> Your KM/cumulative incidence plots and multi-panel horizon analysis are genuinely useful for communicating the survival problem. Consider adding a calibration reliability diagram (predicted probability vs. empirical frequency bucketed) in future — that's the one type of plot missing that would be directly relevant to the Brier Score component.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     3. DATA PREPROCESSING & CLEANING
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">Data Preprocessing &amp; Cleaning</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Thorough. Identifies and flags zero-inflated features (&gt;50% zeros), checks for missing values (none found), detects multicollinearity (|r|&gt;0.9 pairs removed), checks for outliers, and validates train/test distribution parity. RobustScaler applied to non-binary features to handle outliers. Scaler fitted on train only — no data leakage. Binary features correctly excluded from scaling.</div>
+      <span class="score-badge score-9">9 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Minimal but effective: clips distance to lower=1 to avoid division errors, clips negative speeds to 0, replaces infinities and NaNs with 0 after feature creation. Also deliberately drops several raw columns (relative_growth, projected_advance, centroid_displacement, etc.) known to be noisy or redundant. No scaling — not needed for GBSA/LGB.</div>
+      <span class="score-badge score-6">6 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">No preprocessing code. Narrative mentions zero-inflation and outlier concepts but implements nothing. Inherits h-blend preprocessing (none beyond CSV loading).</div>
+      <span class="score-badge score-2">2 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">These work on pre-produced submission CSVs only. No raw data preprocessing at all. The blending pipeline itself does some light normalisation (log10 scale for scatter, merging on event_id) but nothing relevant to model input.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> Your preprocessing is well documented and complete. One thing to borrow from wids-n20: its targeted column dropping of raw features that are likely to leak or be noisy is more deliberate than a blanket multicollinearity filter — it reflects domain reasoning about which features are safe to use directly in survival models.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     4. FEATURE ENGINEERING
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">Feature Engineering</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution (03_feature_engineering)</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Systematic and well-structured: zero indicators + log1p for all zero-inflated features; 5 physics-based interaction terms (dist×growth, dist×speed, growth×speed, dist×alignment, area/dist); composite risk score with domain-weighted components; fire intensity, threat velocity, time-to-impact, spread efficiency; squared terms for 4 key features. ~70 total engineered features feeding a selection step.</div>
+      <span class="score-badge score-8">8 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Highly targeted and competition-aware. Creates: log/inverse/sqrt/rank transforms of distance (7 variants); fire radius geometry (radius_to_dist); ETA and effective ETA accounting for radial growth; threat score (alignment × speed / log(dist)); fire urgency and growth intensity; near/far/critical zone binary flags; summer and afternoon indicators. All inside one clean function with inf/NaN cleanup. Near-zone subset features for LR head. Very focused on what actually drives the score.</div>
+      <span class="score-badge score-9">9 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">No feature engineering implemented. Narrative discusses concepts (alignment_abs as top feature, growth explosion, directionality) accurately, but all feature work is inherited from h-blend/wids00 which operates on pre-generated submissions.</div>
+      <span class="score-badge score-1">1 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">No model-level feature engineering. The blend notebooks engineer a "rank order" meta-feature (sorting submissions by prediction value and applying positional weights) — an interesting implicit diversity mechanism, but not feature engineering in the traditional sense.</div>
+      <span class="score-badge score-2">2 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> wids-n20's feature engineering is the standout. Two ideas worth adopting: (1) the <strong>effective ETA</strong> feature (dist / (closing_speed + radial_growth)) combines two threat signals into an interpretable physical quantity your approach misses; (2) <strong>zone flag features</strong> (critical/warning/safe binary indicators based on distance thresholds) let the model learn different regimes explicitly and align with the known 5km rule.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     5. CROSS-VALIDATION STRATEGY
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">Cross-Validation Strategy</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Single 80/20 stratified train/val split (stratify=event). Clean, no leakage (scaler fitted on train only). However, no k-fold cross-validation is performed — final model is trained on the full set and tested only on the hold-out, so variance in performance estimate is high. No out-of-fold predictions.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Full 5-fold StratifiedKFold repeated across 20 seeds (100 fold-model runs per config, 500 total for GBSA alone plus 25 seeds × 5 folds for LGB). Predictions averaged across all seeds and folds — robust variance reduction. Uses event stratification throughout. Handles the near-zone subset adaptively (adjusts n_splits based on minority class size). No data leakage.</div>
+      <span class="score-badge score-10">10 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">Inherits h-blend strategy — no CV, just blending of final predictions.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">No model training, so no CV. The blend itself does a rank-sort across submissions (ascending + descending pass then averaged with 30/70 weight) which functions as a kind of soft diversity mechanism between submissions, but is not CV.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> This is the single biggest gap in your solution. wids-n20's seed-averaged 5-fold approach produces far more stable test predictions and is the standard approach for competition notebooks. Consider adopting a 5-fold StratifiedKFold with at least 5 seeds, averaging OOF and test predictions.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     6. MODEL GENERATION & SCORE
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">Model Generation &amp; Score</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Kaplan-Meier baseline → Cox PH (L2, α=0.1) → Random Survival Forest (100 trees dev, 200 final). RSF selected as best model. Correct survival framing, correct monotonicity enforcement. No LB score stated. Solid foundational approach but RSF is a weaker performer on this dataset than gradient boosting survival methods.</div>
+      <span class="score-badge score-6">6 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">3-model multi-head pipeline: (1) GradientBoostingSurvivalAnalysis (5 configs × 20 seeds × 5 folds = 500 models); (2) LightGBM classifier with IPCW weighting for 24h and 48h horizons; (3) Logistic regression on near-zone (&lt;5km) samples for 12h/24h/48h calibration. Hard-coded near=1.0 and far=0.0 for 72h using the 5km boundary rule. Achieves LB score implied at 0.97167 range (best of the blended submissions). Exceptional model sophistication.</div>
+      <span class="score-badge score-10">10 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">No original modelling. References feature importance ranks from "your model" in the narrative but contains no actual model training. Identical blend code to h-blend/wids00.</div>
+      <span class="score-badge score-1">1 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">No model training. Blend of 4 external submissions with LB scores 0.97055–0.97167, weighted heavily toward the best submission (0.85 weight). The blend pipeline uses a rank-order diversity mechanism that gives position-dependent sub-weights. Clever meta-level approach, but only valid if strong base models already exist.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> The most important upgrade you can make is adopting <strong>GradientBoostingSurvivalAnalysis</strong> (GBSA) in place of RSF. It is consistently the top-performing survival model on tabular data. The IPCW-weighted LightGBM head for the censored horizons (24h, 48h) is a genuinely clever idea — it properly handles censored observations in a classification framework, which RSF does less well for specific horizons.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     7. HYPERPARAMETER TUNING
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-title">Hyperparameter Tuning</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">No tuning performed. Cox PH alpha is fixed at 0.1, RSF uses default-adjacent values (100/200 trees, min_samples_split=10, min_samples_leaf=5). No grid search or Optuna. Next-steps section mentions tuning as a future step.</div>
+      <span class="score-badge score-3">3 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Manual but deliberate: 5 GBSA configs varied across learning_rate (0.005–0.01), subsample (0.6–0.85), n_estimators (1200–2000), min_samples_leaf (12–20). LGB configs per horizon (24h and 48h) with separate max_depth, regularisation (reg_alpha/lambda), num_leaves. Near-zone LR regularisation (C) also tuned per horizon (0.2–0.5). A PowerCal calibration correction on the 24h GBSA output (** 1.1 exponent). Clearly the result of experimentation.</div>
+      <span class="score-badge score-8">8 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">Inherits h-blend weights — tuned by hand against leaderboard.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">Blend weights (0.85/0.05/0.05/0.05) and sub-weights (-0.07/-0.03/-0.01/+0.11) appear hand-tuned against leaderboard feedback. The rank-order blend ratio (0.30 asc / 0.70 desc) is also manually set. No systematic search.</div>
+      <span class="score-badge score-4">4 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> Optuna-based hyperparameter optimisation would be a meaningful upgrade to your notebook 04. Even a simple grid search over RSF's n_estimators and min_samples_leaf using OOF C-index as the objective would improve your model.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     8. ENSEMBLING / STACKING
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-title">Ensembling / Stacking</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">No ensembling. Single final RSF model trained on full data. Monotonicity enforcement is the only post-processing step. The next-steps section mentions ensemble methods as future work.</div>
+      <span class="score-badge score-2">2 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Sophisticated multi-level ensemble: (1) Config-level averaging (5 GBSA configs); (2) Seed-level averaging (20 seeds per config); (3) Fold-level averaging (5-fold per seed); (4) Model-type blending (GBSA + LGB at 24h and 48h); (5) Regime-conditioned calibration (near stable / near sparse / far); (6) Near-only LR head blended per horizon. The 72h hard assignment (near=1.0, far=0.0) is the most elegant decision — exploits a structural rule from the problem definition.</div>
+      <span class="score-badge score-10">10 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">Same h-blend framework. No original ensembling.</div>
+      <span class="score-badge score-na">N/A</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">Sophisticated submission-level ensemble with a rank-diversity mechanism: predictions are sorted ascending and descending, then blended 30/70. Per-rank sub-weights (-0.07 to +0.11) give more weight to higher-ranked (better-performing) predictions within each row. Operates separately per horizon (12h/24h/48h/72h). Well-designed but operates entirely at the submission layer.</div>
+      <span class="score-badge score-7">7 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> The near/far segmentation with different prediction regimes in wids-n20 is the key insight. The 72h hard-assignment is particularly worth adopting — it's logically sound (if a fire is within 5km, it will almost certainly be within 5km 72h later) and removes noise from the model. The GBSA+LGB blend at specific horizons shows that different model families can be better suited to different time horizons.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     9. CODE QUALITY & STRUCTURE
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">09</span>
+    <span class="section-title">Code Quality &amp; Structure</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Excellent structure: four dedicated notebooks with clear responsibilities (EDA → Viz → Feature Engineering → Modelling). Well-named helper functions with docstrings. Constants extracted (RANDOM_STATE). Type hints used. Functions are modular and reusable. Intermediate files saved and loaded correctly across notebooks. Minor issue: some type-ignore comments suggest occasional type inference problems.</div>
+      <span class="score-badge score-9">9 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Compact and functional. All feature engineering in one create_features() function. Utility functions well-named (get_surv_predictions, make_binary_target, compute_ipcw_weights, enforce_monotonicity). Constants (SEEDS, HORIZONS_PRED) are named. However: no docstrings, magic numbers scattered in the blend logic (0.78, 0.97, 0.88 etc.), no modularity between the three model types. Dense but readable.</div>
+      <span class="score-badge score-7">7 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">The narrative markdown is beautifully structured as a story. The code is a copy-paste of h-blend with no modifications. Very poor code quality for the modelling section — the two sections (narrative + blend code) feel completely disconnected.</div>
+      <span class="score-badge score-3">3 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">The h-blend library is genuinely well-engineered — parameterised, flexible, supports Bokeh and seaborn backends, handles multiple blend types. However, the library code is duplicated verbatim across three notebooks (h-blend, wids00, wids-global) — a significant DRY violation. The blend parameters (weights, paths) are in separate cells which aids readability.</div>
+      <span class="score-badge score-6">6 / 10</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     10. REPRODUCIBILITY
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">10</span>
+    <span class="section-title">Reproducibility</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Good. RANDOM_STATE=42 set globally. np.random.seed called. Scaler saved via joblib with metadata JSON. Numbered notebooks enforce execution order. Feature list saved to CSV so downstream notebooks use the same features. Library versions not pinned, but overall reproducibility is solid.</div>
+      <span class="score-badge score-8">8 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">Seed list is explicit and comprehensive (20 named seeds, clearly enumerated). All random_state parameters passed explicitly to each model. locate_datasets() function handles path portability across Kaggle and local environments. Elapsed time tracking for long runs. No version pinning.</div>
+      <span class="score-badge score-8">8 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">Random seed set (42). Blend weights hardcoded. Path variables explicit. Similar to h-blend.</div>
+      <span class="score-badge score-6">6 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">Paths and weights hardcoded in clear cells. Uses random.seed(42) for any sampling. Kaggle input paths explicit. Depends on external CSV files which are not reproducible from scratch within the notebook.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     11. DOCUMENTATION & EXPLANATION
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">11</span>
+    <span class="section-title">Documentation &amp; Explanation</span>
+  </div>
+  <div class="cards-grid">
+
+    <div class="card you-card">
+      <div class="card-label" style="color:var(--you)">Your Solution</div>
+      <div class="card-nb">Notebooks 01–04 (Combined)</div>
+      <div class="card-text">Outstanding. Every code cell is preceded by a markdown section explaining WHY the step exists, what to look for in outputs, and what interpretations to draw. Inline comments annotate even standard operations. Emoji used effectively for visual hierarchy. Conceptual callout boxes (💡 Interpretation, ⚠️ Warning) distinguish explanation types. The docstrings follow a consistent Parameters/Returns format. Pedagogically excellent — a new team member could follow this end-to-end without prior knowledge of the competition.</div>
+      <span class="score-badge score-10">10 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--n20)">wids-n20</div>
+      <div class="card-nb">wids-n20.py</div>
+      <div class="card-text">No markdown documentation. Minimal inline comments (one-liners like # PowerCal 24h). The code is dense and expert-level — you can understand what it does, but not why specific blend weights (0.78, 0.97) or calibration floors (0.90, 0.965) were chosen. The logic is implicit in the numbers.</div>
+      <span class="score-badge score-3">3 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--fire)">the-fire-intelligence-story</div>
+      <div class="card-nb">the-fire-intelligence-story.py</div>
+      <div class="card-text">The narrative documentation is genuinely impressive — seven thematic sections with conceptual insights, storytelling metaphors, and clear callouts of the most important features. However, this narrative is entirely decoupled from any actual code. Where it does reference findings ("alignment = #1 feature, 26%"), these appear to come from an external model, not the code in this notebook.</div>
+      <span class="score-badge score-5">5 / 10</span>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:var(--hblend)">h-blend / wids00 / wids-global</div>
+      <div class="card-nb">Blend notebooks</div>
+      <div class="card-text">Light section headers (## 12h, ## 24h) and the wids-global notebook adds inline step labels (# 12th hour updates). The h-blend library itself has attribution comments (credits Likitha Gedipudi). Thin overall — the blend parameters have no justification.</div>
+      <span class="score-badge score-4">4 / 10</span>
+    </div>
+
+  </div>
+  <div class="insight">
+    <strong>Takeaway:</strong> Your documentation is genuinely best-in-class among these notebooks and sets a high bar. This level of explanation is rare in competition notebooks and makes your work reusable and educational. The only suggestion: consider adding a summary decision log at the end of each notebook explaining what you tried and rejected — the "why not" context is as valuable as the "why".
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SUMMARY TABLE
+══════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">—</span>
+    <span class="section-title">Overall Summary Table</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Your Solution<br><span style="color:var(--you)">01–04</span></th>
+          <th>wids-n20<br><span style="color:var(--n20)">wids-n20</span></th>
+          <th>Fire Story<br><span style="color:var(--fire)">fire-story</span></th>
+          <th>h-blend<br><span style="color:var(--hblend)">h-blend</span></th>
+          <th>wids00<br><span style="color:var(--wids00)">wids00</span></th>
+          <th>wids-global<br><span style="color:var(--wids-global)">wids-global</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-you">
+          <td><span class="cat-name">1. EDA</span></td>
+          <td><span class="score-badge score-9">9</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">2. Data Visualisation</span></td>
+          <td><span class="score-badge score-9">9</span></td>
+          <td><span class="score-badge score-2">1</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">3. Preprocessing &amp; Cleaning</span></td>
+          <td><span class="score-badge score-9">9</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">4. Feature Engineering</span></td>
+          <td><span class="score-badge score-8">8</span></td>
+          <td><span class="score-badge score-9">9</span></td>
+          <td><span class="score-badge score-2">1</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">5. Cross-Validation</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-10">10</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">6. Model Generation &amp; Score</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+          <td><span class="score-badge score-10">10</span></td>
+          <td><span class="score-badge score-2">1</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">7. Hyperparameter Tuning</span></td>
+          <td><span class="score-badge score-3">3</span></td>
+          <td><span class="score-badge score-8">8</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">8. Ensembling / Stacking</span></td>
+          <td><span class="score-badge score-2">2</span></td>
+          <td><span class="score-badge score-10">10</span></td>
+          <td><span class="score-badge score-na">—</span></td>
+          <td><span class="score-badge score-7">7</span></td>
+          <td><span class="score-badge score-7">7</span></td>
+          <td><span class="score-badge score-7">7</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">9. Code Quality</span></td>
+          <td><span class="score-badge score-9">9</span></td>
+          <td><span class="score-badge score-7">7</span></td>
+          <td><span class="score-badge score-3">3</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">10. Reproducibility</span></td>
+          <td><span class="score-badge score-8">8</span></td>
+          <td><span class="score-badge score-8">8</span></td>
+          <td><span class="score-badge score-6">6</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+        </tr>
+        <tr class="row-you">
+          <td><span class="cat-name">11. Documentation</span></td>
+          <td><span class="score-badge score-10">10</span></td>
+          <td><span class="score-badge score-3">3</span></td>
+          <td><span class="score-badge score-5">5</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+          <td><span class="score-badge score-4">4</span></td>
+        </tr>
+        <tr class="total-row">
+          <td style="color:var(--text)">Total (/ 110 comparable)</td>
+          <td style="color:var(--you)">78</td>
+          <td style="color:var(--n20)">74</td>
+          <td style="color:var(--fire)">26</td>
+          <td style="color:var(--hblend)">33</td>
+          <td style="color:var(--wids00)">33</td>
+          <td style="color:var(--wids-global)">33</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="insight" style="margin-top:16px">
+    <strong>Note on scoring:</strong> h-blend, wids00, and wids-global are submission-blending notebooks — they skip EDA, preprocessing, feature engineering, CV, and model training entirely. Their scores reflect only the categories where they participate. The fire-intelligence-story is primarily a narrative notebook with a copy-pasted blend backend. wids-n20 and your solution are the two complete end-to-end approaches.
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     CONCLUSION
+══════════════════════════════════════ -->
+<div class="conclusion">
+  <h2>Conclusion &amp; Recommendations</h2>
+
+  <p style="color:var(--text-dim); margin-bottom: 20px;">
+    Your four-notebook solution is the most complete, best-documented, and most pedagogically valuable in the set. wids-n20 is the strongest on pure modelling performance. Here is a concrete improvement roadmap:
+  </p>
+
+  <div class="strengths-grid">
+    <div class="strength-block green">
+      <h3>✓ What You Did Well</h3>
+      <ul>
+        <li>Best-in-class EDA — systematic, statistical, actionable</li>
+        <li>Outstanding documentation — every decision justified</li>
+        <li>Clean preprocessing pipeline — no leakage, robust scaler</li>
+        <li>Good coverage of KM/cumulative incidence visualisation</li>
+        <li>Correct survival analysis framing with monotonicity enforcement</li>
+        <li>Well-structured four-notebook architecture with clean handoffs</li>
+        <li>Dual feature selection (correlation + mutual information)</li>
+      </ul>
+    </div>
+
+    <div class="strength-block blue">
+      <h3>→ Highest-Impact Improvements</h3>
+      <ul>
+        <li>Replace RSF with GradientBoostingSurvivalAnalysis (GBSA)</li>
+        <li>Add 5-fold StratifiedKFold with multiple seeds — biggest score gain</li>
+        <li>Add effective ETA feature: dist / (closing_speed + radial_growth)</li>
+        <li>Add zone flag features: zone_critical, zone_warning, zone_safe</li>
+        <li>Hard-assign prob_72h = 1.0 for near-zone, 0.0 for far-zone fires</li>
+        <li>Add IPCW-weighted LGB classifier head for 24h and 48h horizons</li>
+        <li>Implement regime-conditioned calibration (stable vs. sparse near-zone)</li>
+        <li>Add Optuna hyperparameter search in notebook 04</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</main>
+</body>
+</html>

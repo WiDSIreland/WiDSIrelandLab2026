@@ -1,7 +1,7 @@
 [project]
 name = "widsirelandlab2026"
 version = "0.1.0"
-description = "Add your description here"
+description = "WiDS Datathon 2026 - Wildfire Evacuation Zone Impact Prediction using Survival Analysis"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

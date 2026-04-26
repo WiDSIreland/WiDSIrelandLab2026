@@ -42,7 +42,7 @@ WiDSIrelandLab2026/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.10+
+- Python 3.12+
 - uv (recommended) or pip
 
 ### Installation
@@ -50,13 +50,13 @@ WiDSIrelandLab2026/
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/WiDSIrelandLab2026.git
-cd WiDSIrelandLab2026/ai_approach
+cd WiDSIrelandLab2026
 
 # Install dependencies using uv (recommended)
 uv sync
 
 # Or using pip
-pip install -r requirements.txt
+pip install -e .
 ```
 
 ### Running the Analysis
@@ -97,7 +97,7 @@ This project was developed as part of the WiDS Datathon 2026. Contributions and 
 
 ## 📄 License
 
-See [LICENSE](ai_approach/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 

@@ -61,6 +61,25 @@ See the detailed documentation in [`ai_approach/README.md`](ai_approach/README.m
 - **Model Ensemble**: Kaplan-Meier, Cox PH, and Random Survival Forest
 - **Monotonicity Enforcement**: Ensures prob_12h ≤ prob_24h ≤ prob_48h ≤ prob_72h
 
+## 🎯 Results
+
+### Model Performance
+- **Best Model**: Random Survival Forest
+- **Primary Metric**: Hybrid Score = 0.3 × C-index + 0.7 × (1 - Weighted Brier Score)
+- **Evaluation**: C-index (Concordance Index) for ranking quality
+
+### Key Findings
+- **Top Predictors**: Distance metrics, growth rates, and domain-specific features
+- **Feature Importance**: Distance to evacuation zone is the strongest predictor
+- **Censoring Handling**: Survival analysis properly accounts for ~50% censored observations
+- **Multi-Horizon Predictions**: Calibrated probabilities at 12h, 24h, 48h, and 72h time horizons
+
+### Operational Impact
+- **Evacuation Prioritization**: Rank which communities need warnings first
+- **Resource Deployment**: Guide allocation of firefighting crews and aircraft
+- **Risk Communication**: Provide calibrated probabilities for threshold-based decisions
+- **Time-Bound Forecasts**: Actionable predictions for emergency response planning
+
 ## 📚 Documentation
 
 Detailed documentation is available in the [`ai_approach/docs/`](ai_approach/docs/) folder:
