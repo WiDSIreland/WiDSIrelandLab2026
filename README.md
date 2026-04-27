@@ -6,9 +6,9 @@ This repository contains the analysis and modeling pipeline for the **Women in D
 
 Predict the probability that a wildfire will threaten an evacuation zone (come within 5 kilometers) at multiple time horizons: 12, 24, 48, and 72 hours after the initial 5-hour observation period.
 
-![image alt](https://github.com/WiDSIreland/WiDSIrelandLab2026/blob/dcfa2580a15e7863ac5e435e8419f3705cf324a4/WiDS%20EDA%20ML.png)
-
 **Challenge Type**: Survival Analysis with Censored Data - Multi-Horizon Probability Forecasting
+
+![image alt](https://github.com/WiDSIreland/WiDSIrelandLab2026/blob/dcfa2580a15e7863ac5e435e8419f3705cf324a4/WiDS%20EDA%20ML.png)
 
 ## 📁 Repository Structure
 
